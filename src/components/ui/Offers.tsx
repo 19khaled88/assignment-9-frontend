@@ -60,6 +60,7 @@ const OfferPage = () => {
     const [createBooking, { error: bookingError, isLoading: bookingLoading }] = useCreateBookingMutation();
     // const format = 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\''
 
+
     const showBookingHandler = (item: any, mod: any) => {
         const token = getTokenFromLocalStorage('validateToken')
         const userInfo = token != null && decodedToken(token)
@@ -89,7 +90,7 @@ const OfferPage = () => {
             "fieldId": bookingData?.fieldId,
             "gameTypeId": bookingData?.gameTypeId
         }
-        
+
 
         try {
             const res = await createBooking({ ...store }).unwrap();
@@ -110,10 +111,10 @@ const OfferPage = () => {
             array.push(
                 <div key={index} className={`${styles.hoverItem} max-w-sm p-6 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
                     <div data-aos="fade-up">
-                        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text">Turf : {item.turfId
-                        }</h5>
-                        <p className="mb-1 text-sm font-normal text-gray-700 dark:text-gray-400">Location : Fields : {item.fieldId}</p>
-                        <p className="mb-1 text-sm font-normal text-gray-700 dark:text-gray-400">Game : {item.gameTypeId}</p>
+                        <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white text">Turf : {item.turf.name}</h5>
+                        <p className="mb-1 text-sm font-normal text-gray-700 dark:text-gray-400">Location : {item.turf.location}</p>
+                        <p className="mb-1 text-sm font-normal text-gray-700 dark:text-gray-400">Fields : {item.field.code}</p>
+                        <p className="mb-1 text-sm font-normal text-gray-700 dark:text-gray-400">Game : {item.gameType.name}</p>
                         <p className="mb-1 text-sm font-normal text-gray-700 dark:text-gray-400">Pay per hour : {item.price_per_hour} {'\u09f3'}</p>
                         <button
                             className="btn inline-flex items-center px-3 py-2 text-sm font-medium text-center 
@@ -150,11 +151,11 @@ const OfferPage = () => {
         return array
     }
 
-   
+
 
     if (isLoading) {
         return (
-            <div className="flex flex-col pt-10 justify-items-center justify-center ">
+            <div  className="flex flex-col pt-10 justify-items-center justify-center ">
                 <h1 className="text-center py-5 text-2xl font-bold text-gray-500">Book you slot here</h1>
                 <div role="status" className="max-w-sm animate-pulse ">
                     <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
@@ -184,11 +185,11 @@ const OfferPage = () => {
         )
     }
     return (
-        <div className="flex flex-col pt-10 justify-items-center justify-center relative">
+        <div style={{background:'#E1E8FF'}} className="flex flex-col pt-10 pb-5 justify-items-center justify-center relative">
             <h1 ref={ref} data-aos="zoom-in" className="text-center py-5 text-2xl font-bold text-gray-500" >Book you slot here</h1>
             <Space className="my-6">
                 <Space.Compact className="absolute inset-x-0 w-3/4 md:w-2/3  lg:w-1/2 mx-auto xl:w-1/3 xl:mr-10 top-24">
-                    <Select className="text-lg" style={{ height: '40px' }} defaultValue="All criteria" options={options} />
+                    <Select className="text-lg" style={{ height: '40px',width:'200px' }} defaultValue="All criteria" options={options} />
                     <Input defaultValue="Search for available slot" style={{ height: '40px', width: '100%' }} />
                     <Button className="bg-blue-500 text-white text-lg" style={{ height: '40px' }}>Submit</Button>
                 </Space.Compact>
