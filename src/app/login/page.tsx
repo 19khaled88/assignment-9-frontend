@@ -77,7 +77,7 @@ const LoginPage = () => {
     );
   }
   return (
-    <div className="w-full">
+    <div className="w-full px-5">
       <ToastContainer />
       <Row style={{ width: "100%", height: "100vh", margin: "auto" }}>
         <Col
@@ -136,7 +136,7 @@ const LoginPage = () => {
               </div>
               <Button
                 style={{ fontSize: "20px", height: "40px" }}
-                type="primary"
+                className="bg-blue-600"
                 htmlType="submit"
               >
                 Login
@@ -145,7 +145,7 @@ const LoginPage = () => {
           </ReactForm>
           <div>
             <h2>Do not have Account?</h2>
-            <Button onClick={() => router.push("/register")} type="primary">
+            <Button onClick={() => router.push("/register")} className="bg-blue-600 text-white font-bold">
               Go Register
             </Button>
           </div>

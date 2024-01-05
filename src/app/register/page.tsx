@@ -108,14 +108,14 @@ const RegisterPage = () => {
                                 <FormInput name='address' type='text' label='Address' required />
                                 <FormInput name='contactNo' type='number' label='Contact No' required />
                             </div>
-                            <Button style={{ fontSize: '20px', height: '40px' }} type='primary' htmlType='submit'>
+                            <Button style={{ fontSize: '20px', height: '40px' }} className="bg-blue-600 text-white" htmlType='submit'>
                                 Register
                             </Button>
                         </div>
                     </ReactForm>
                     <div>
-                        <h2>Have Account</h2>
-                        <Button onClick={() => router.push('/login')} type='primary'>
+                        <h2>Have Account?</h2>
+                        <Button onClick={() => router.push('/login')} className="bg-blue-600 text-white font-bold">
                             Go Login
                         </Button>
                     </div>

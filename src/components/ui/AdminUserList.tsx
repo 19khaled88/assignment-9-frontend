@@ -54,7 +54,13 @@ const AdminUserListTable = () => {
             render: function (data: any) {
                 return (
                     <div style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
-                        <Button onClick={() => console.log(data)} type='primary'>update</Button>
+                        <Button onClick={() => {
+                            if (data && data.role === 'SUPER_ADMIN') {
+                                alert('not permitted')
+                            } else {
+                                console.log(data)
+                            }
+                        }} className='disabled:opacity-50' type='primary'>update</Button>
                         <Button type="primary" danger>delete</Button>
                     </div>
                 )
