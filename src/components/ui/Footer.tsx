@@ -5,7 +5,7 @@ export const Footer = () => {
 
     const footerNavs = [
         {
-            href: '#',
+            href: '/About',
             name: 'About'
         },
         {
