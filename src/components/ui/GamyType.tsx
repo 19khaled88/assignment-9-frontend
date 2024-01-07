@@ -35,7 +35,8 @@ const GameTypePage = () => {
     }, [isInView]);
     // const query: Record<string, any> = {}
     const { data: gameTypes, isLoading, isError, error, isFetching } = useAllGameTypesQuery({ ...query })
-
+    
+   
     const options = [
         {
             value: 'all',

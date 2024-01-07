@@ -56,9 +56,6 @@ const news = [
 // const randomElement = Math.floor(Math.random() * news.length);
 
 
-
-
-
 const News = () => {
     const [newsValue, setNewsValue] = useState<Record<string, unknown>[]>([])
     const [isLoading, setIsLoading] = useState(true)

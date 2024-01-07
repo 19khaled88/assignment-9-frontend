@@ -14,7 +14,8 @@ const override: CSSProperties = {
 const GameTypeDetails = ({ ...detailsProps }) => {
     const router = useRouter()
     const { data: gameTypeWithId, isLoading } = useGameTypeWithIdQuery(detailsProps?.id)
-
+    
+    console.log(gameTypeWithId)
 
     const GameOffers = (GameOffers: any) => {
 
@@ -23,14 +24,14 @@ const GameTypeDetails = ({ ...detailsProps }) => {
             array.push(
                 <div key={i} className={`col-span-1 max-w-sm m-2 p-4 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
                     <div>
-                        <h5 className="mb-2 text-2xl font-bold text-xl tracking-tight text-gray-900 dark:text-white">
-                            Field : {GameOffers[i]?.fieldId}
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            Field : {GameOffers[i]?.field.code}
                         </h5>
                         <p className="mb-1 font-normal text-sm text-gray-700 dark:text-gray-400">
-                            Game type : {GameOffers[i]?.gameTypeId}
+                            Game type : {GameOffers[i]?.gameType.name}
                         </p>
                         <p className="mb-1 font-normal text-sm text-gray-700 dark:text-gray-400">
-                            Turf : {GameOffers[i]?.turfId}
+                            Turf : {GameOffers[i]?.turf.name}
                         </p>
                         <p className="mb-1 font-normal text-sm text-gray-700 dark:text-gray-400">
                             Price per hour : {GameOffers[i]?.price_per_hour}
@@ -46,7 +47,7 @@ const GameTypeDetails = ({ ...detailsProps }) => {
 
     if (isLoading) {
         return (
-            <div className='h-96 text-2xl flex flex-col justify-center justify-center shadow-2xl mx-10 p-10 rounded-md'>
+            <div className='h-96 text-2xl flex flex-col justify-center shadow-2xl mx-10 p-10 rounded-md'>
                 <PropagateLoader
                     color="#36d7b7"
                     cssOverride={override}
@@ -57,7 +58,7 @@ const GameTypeDetails = ({ ...detailsProps }) => {
         )
     } else if (gameTypeWithId === undefined) {
         return (
-            <div className='h-96 text-2xl flex flex-col justify-center justify-center shadow-2xl mx-10 p-10 rounded-md'>
+            <div className='h-96 text-2xl flex flex-col justify-center shadow-2xl mx-10 p-10 rounded-md'>
                 <PropagateLoader
                     color="#36d7b7"
                     cssOverride={override}
@@ -67,7 +68,7 @@ const GameTypeDetails = ({ ...detailsProps }) => {
             </div>
         )
     } return (
-        <div className='text-2xl grid grid-cols-3 gap-5 rounded-md mt-10 shadow-2xl py-10 px-10  m-auto mb-16 mt-10' style={{ width: '95%' }}>
+        <div className='text-2xl grid grid-cols-3 gap-5 rounded-md  shadow-2xl py-10 px-10  m-auto mb-16 mt-10' style={{ width: '95%' }}>
 
             <div className={`col-span-1  m-2 p-6 w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
 
