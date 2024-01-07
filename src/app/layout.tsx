@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <Providers>
-      <html lang="en">
+      <html lang="en" className='scroll-smooth focus:scroll-auto"'>
         
 
         <body suppressHydrationWarning={true} className={inter.className}>

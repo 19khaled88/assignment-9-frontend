@@ -7,10 +7,10 @@ import AccordionItem from "@/components/ui/AccordianItem";
 const About = () => {
   return (
     <div className="p-5 flex flex-col gap-10">
-      <span className="grid grid-cols-2 gap-5 ">
+      <span className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
         <div>
           <h1 className="text-2xl text-gray-600 py-3">About Us</h1>
-          <p>
+          <p className="text-justify">
             Turf Business is the industry U+2019 s number one hub for turf news,
             product information, profiles and interviews in printed and digital
             formats. The place where the big names share their knowledge,
@@ -27,7 +27,7 @@ const About = () => {
           <MyMap />
         </div>
       </span>
-      <span className="grid grid-cols-2 gap-5">
+      <span className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <h1 className="text-2xl text-gray-600 py-3">Contact Details</h1>
           <div className="flex flex-col gap-2">
@@ -76,22 +76,17 @@ const About = () => {
         </div>
       </span>
       <span>
-        <section className="relative z-20 overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
+        <section className="relative z-20 overflow-hidden bg-white pb-12 pt-10 dark:bg-dark lg:pb-[90px] lg:pt-[50px]">
           <div className="container mx-auto">
             <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4">
-                <div className="mx-auto mb-[60px] max-w-[520px] text-center lg:mb-20">
+                <div className="mx-auto mb-[20px] max-w-[520px] text-center lg:mb-8">
                   <span className="mb-2 block text-lg font-semibold text-primary">
                     FAQ
                   </span>
-                  <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
+                  <h2 className="mb-2 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
                     Any Questions? Look Here
                   </h2>
-                  <p className="text-base text-body-color dark:text-dark-6">
-                    There are many variations of passages of Lorem Ipsum
-                    available but the majority have suffered alteration in some
-                    form.
-                  </p>
                 </div>
               </div>
             </div>
@@ -99,30 +94,32 @@ const About = () => {
             <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4 lg:w-1/2">
                 <AccordionItem
-                  header="How long we deliver your first blog post?"
-                  text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                  header="What is the purpose of the Healthy Sport Index?"
+                  text="It U+2019 s a web-based tool to help athletes, parents and other stakeholders make better informed decisions about which sports will best meet their goals. The Healthy Sport Index combines the best available data and expert analysis to identify the relative benefits and risks of participating in the 10 most popular high school sports played by boys and girls."
                 />
                 <AccordionItem
-                  header="How long we deliver your first blog post?"
-                  text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                  header="What health impacts are being evaluated?"
+                  text="The Healthy Sport Index looks at physical activity, safety and psychosocial benefits. One of the chief contributions of sport participation is physical activity, given the documented physiological and cognitive benefits that flow to youth whose bodies are in motion. We also recognize that psychological and social aspects of sports play an important role in youth having a healthy and positive sports experience. At the same time, the benefits of playing sports can be limited by short- and long-term injuries.."
                 />
                 <AccordionItem
-                  header="How long we deliver your first blog post?"
-                  text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                  header="Should only parents of high school athletes use the Healthy Sport Index?"
+                  text="Not necessarily. The tool is limited to high school sports, given that is where the best data exist. Parents of children of all ages may find value in the tool, as well as school administrators, city managers and other stakeholders interested in using sport to develop healthy kids and communities."
                 />
               </div>
               <div className="w-full px-4 lg:w-1/2">
                 <AccordionItem
-                  header="How long we deliver your first blog post?"
-                  text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                  header="Which sports are being evaluated?"
+                  text="Boys sports: Baseball, basketball, cross country, football, lacrosse, soccer, swimming, tennis, track and field, wrestling.
+
+                  Girls sports: Basketball, cheerleading, cross country, lacrosse, soccer, softball, swimming, tennis, track and field, volleyball."
                 />
                 <AccordionItem
-                  header="How long we deliver your first blog post?"
-                  text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                  header="When the Healthy Sport Index rates a sport low, does that mean youth should not play that sport?"
+                  text="No, not at all. Project Play and a large body of existing research support the concept that playing sports is good for youth. Any sport, when served well, can produce myriad benefits for participants. The Healthy Sport Index is not intended to tell parents which sports their kids should or shouldn U+2019 t play. Rather, this website makes it easy for parents and other users to customize their assessment to the needs of the youth population in question."
                 />
                 <AccordionItem
-                  header="How long we deliver your first blog post?"
-                  text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
+                  header="Is the Healthy Sport Index only about rankings?"
+                  text="No. The actual index produces rankings. But the Healthy Sport Index is more than just numbers; it U+2019 s also about offering ideas, solutions and context for high school sports health. Companion content on the website includes:"
                 />
               </div>
             </div>

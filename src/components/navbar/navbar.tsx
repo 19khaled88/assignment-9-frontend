@@ -64,8 +64,8 @@ const Navbar = () => {
         },
         {
             id: 3,
-            link: "/Feature",
-            name: 'Feature',
+            link: "/Blog",
+            name: 'Blog',
             badge: false,
             icon: <MdOutlineFeaturedPlayList size={15} />
         },
@@ -87,7 +87,7 @@ const Navbar = () => {
 
     return (
         <motion.div
-            className={`flex justify-between items-center w-full text-white h-16  z-50  ${isInView === true ? 'relative bg-teal-500' : 'fixed bg-blue-400'} `}>
+            className={`flex justify-between items-center w-full transition-opacity ease-in duration-700   text-white h-16  z-50 ${isInView === true ? 'relative bg-teal-500' : 'opacity-100 fixed bg-blue-400'} `}>
             <div style={{ paddingLeft: '20px' }}>
                 {/* <h1 className="text-5xl font-signature ml-2"><a className="link-underline hover:transition ease-in-out delay-150 hover:underline hover:decoration-solid" href="">Logo</a></h1> */}
                 <h1 className="text-5xl font-signature ml-2">
