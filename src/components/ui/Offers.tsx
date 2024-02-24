@@ -2,7 +2,7 @@ import { useCreateBookingMutation } from '@/redux/api/bookingApi';
 import { useAllOffersQuery } from '@/redux/api/offerApi';
 import { decodedToken } from '@/utils/jwt';
 import { getTokenFromLocalStorage } from '@/utils/localstorage';
-import { Button, Input, Select, Space } from 'antd';
+import { Button, Input, Select, Space, Spin } from 'antd';
 import AOS from 'aos';
 import { format } from 'date-fns';
 import { useInView } from 'framer-motion';
@@ -19,7 +19,12 @@ const OfferPage = () => {
     const isInView = useInView(ref)
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [searchData, setSearchData] = useState<string>('')
+    const [searchTitle, setSearchTitle] = useState<string>('game')
+    const [allOffers, setAllOffers] = useState([])
+    const [query, setQuery] = useState<Record<string, any>>({})
     const [userId, setUserId] = useState('')
+    const [loading, setLoading] = useState(false)
     const [bookingData, setBookingData] = useState({
         "id": "",
         "start_time": "",
@@ -45,21 +50,35 @@ const OfferPage = () => {
         });
         AOS.refresh();
     }, [isInView]);
+
     const options = [
         {
-            // value: 'zhejiang',
-            // label: 'Zhejiang',
+            value: 'all',
+            label: 'select all',
         },
-        // {
-        //     value: 'jiangsu',
-        //     label: 'Jiangsu',
-        // },
+        {
+            value: 'location',
+            label: 'location',
+        },
+        {
+            value: 'game',
+            label: 'game',
+        },
     ];
-    const query: Record<string, any> = {}
+    // const query: Record<string, any> = {}
     const { data: offers, isLoading, isError, error } = useAllOffersQuery({ ...query })
     const [createBooking, { error: bookingError, isLoading: bookingLoading }] = useCreateBookingMutation();
     // const format = 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\''
 
+    useEffect(() => {
+        if (offers !== undefined) {
+            setLoading(false)
+
+         setAllOffers(offers.data.data)
+          
+            // setQuery({})
+        }
+    }, [offers,query])
 
     const showBookingHandler = (item: any, mod: any) => {
         const token = getTokenFromLocalStorage('validateToken')
@@ -107,7 +126,7 @@ const OfferPage = () => {
 
     const showOffers = (offers: any): ReactNode => {
         let array: any[] = []
-        offers != undefined && offers?.data.map((item: any, index: number) => {
+        offers?.data?.data.map((item: any, index: number) => {
             array.push(
                 <div key={index} className={`${styles.hoverItem} max-w-sm p-6 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
                     <div data-aos="fade-up">
@@ -151,11 +170,27 @@ const OfferPage = () => {
         return array
     }
 
+    const handleOfferClick = () => {
+        let obj: Record<string, unknown> = {}
+        setLoading(true)
+        if (searchTitle === 'game' && searchData === '') {
+            obj["name"] = ""
+            setQuery(obj)
+        } else if (searchTitle === 'game' && searchData != '') {
+            obj['name'] = searchData.charAt(0).toUpperCase() + searchData.slice(1)
+            setQuery(obj)
+        }
+        else {
+            obj[searchTitle] = searchData
+            setQuery(obj)
+        }
+    }
 
+    // console.log(loading, isLoading, allOffers, query)
 
     if (isLoading) {
         return (
-            <div  className="flex flex-col pt-10 justify-items-center justify-center ">
+            <div className="flex flex-col pt-10 justify-items-center justify-center ">
                 <h1 className="text-center py-5 text-2xl font-bold text-gray-500">Book you slot here</h1>
                 <div role="status" className="max-w-sm animate-pulse ">
                     <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
@@ -183,15 +218,40 @@ const OfferPage = () => {
                 </div>
             </div>
         )
-    }
-    return (
-        <div style={{background:'#E1E8FF'}} className="flex flex-col pt-10 pb-5 justify-items-center justify-center relative">
+    } return (
+        <div style={{ background: '#E1E8FF' }} className="flex flex-col pt-10 pb-5 justify-items-center justify-center relative">
             <h1 ref={ref} data-aos="zoom-in" className="text-center py-5 text-2xl font-bold text-gray-500" >Book you slot here</h1>
             <Space className="my-6">
                 <Space.Compact className="absolute inset-x-0 w-3/4 md:w-2/3  lg:w-1/2 mx-auto xl:w-1/3 xl:mr-10 top-24">
-                    <Select className="text-lg" style={{ height: '40px',width:'200px' }} defaultValue="All criteria" options={options} />
-                    <Input defaultValue="Search for available slot" style={{ height: '40px', width: '100%' }} />
-                    <Button className="bg-blue-500 text-white text-lg" style={{ height: '40px' }}>Submit</Button>
+                    {
+                        loading ?
+                            <>
+                                <div className="mx-5 flex flex-row justify-center items-center">
+                                    <Spin />
+                                </div>
+                                <Select
+                                    className="text-lg" style={{ height: '40px', width: '200px' }}
+                                    defaultValue={searchTitle}
+                                    options={options}
+                                    onChange={(value: string) => setSearchTitle(value)}
+                                />
+
+                            </>
+                            :
+                            <Select
+                                className="text-lg" style={{ height: '40px', width: '200px' }}
+                                defaultValue={searchTitle}
+                                options={options}
+                                onChange={(value: string) => setSearchTitle(value)}
+                            />
+                    }
+
+                    <Input
+                        // defaultValue="Search for available slot"
+                        placeholder="Search by location or game"
+                        onChange={(e) => setSearchData(e.target.value)}
+                        style={{ height: '40px', width: '100%' }} />
+                    <Button onClick={handleOfferClick} className="bg-blue-500 text-white text-lg" style={{ height: '40px' }}>Submit</Button>
                 </Space.Compact>
             </Space>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 justify-items-center justify-center shadow-2xl mx-10 p-10 rounded-md">

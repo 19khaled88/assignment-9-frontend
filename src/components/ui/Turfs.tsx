@@ -71,6 +71,7 @@ const Turfs = () => {
         isFetching
     } = useAllTurfsQuery({ ...query });
     
+    
 
     const showTurfs = (turfs: any): ReactNode => {
         let array: any[] = [];
@@ -184,10 +185,9 @@ const Turfs = () => {
             obj[searchTitle] = searchData
             setQuery(obj)
         }
-
     }
 
-
+    
     if (isLoading) {
         return (
             <div className="flex flex-col pt-10 justify-items-center justify-center ">
@@ -224,7 +224,8 @@ const Turfs = () => {
                             onChange={(value: string) => setSearchTitle(value)}
                         />
                         <Input
-                            defaultValue="Search for Turf"
+                            // defaultValue="Search for Turf"
+                            placeholder="Search by name,location or owner"
                             onChange={(e) => setSearchData(e.target.value)}
                             style={{ height: "40px", width: "100%" }}
                         />
@@ -264,9 +265,11 @@ const Turfs = () => {
                             onChange={(value: string) => setSearchTitle(value)}
                         />
                         <Input
-                            defaultValue="Search for Turf"
+                            // defaultValue="Search for Turf"
+                            placeholder="Search by name,location or owner"
                             onChange={(e) => setSearchData(e.target.value)}
                             style={{ height: "40px", width: "100%" }}
+                    
                         />
                         <Button
                             className="bg-blue-500 text-white text-lg"
@@ -310,7 +313,8 @@ const Turfs = () => {
                         onChange={(value: string) => setSearchTitle(value)}
                     />
                     <Input
-                        defaultValue="Search for Turf"
+                         // defaultValue="Search for Turf"
+                         placeholder="Search by name,location or owner"
                         onChange={(e) => setSearchData(e.target.value)}
                         style={{ height: "40px", width: "100%" }}
                     />
