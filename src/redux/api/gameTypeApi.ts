@@ -20,7 +20,7 @@ export const gameTypeApi = baseApi.injectEndpoints({
       }),
       transformErrorResponse: (response: IGameTypeResponse, meta: IMeta) => {
         return {
-          games: response,
+          gametypes: response,
           meta
         }
       },

@@ -179,13 +179,21 @@ const Turfs = () => {
     const handleTurfClick = () => {
         let obj: Record<string, unknown> = {}
         if (searchTitle === 'name' && searchData === '') {
-            obj["name"] = ""
+            // obj["name"] = ""
+            obj["searchTerm"] = ""
             setQuery(obj)
-        } else {
+        } else if(searchTitle === 'all'){
             obj[searchTitle] = searchData
             setQuery(obj)
         }
+         else {
+            // obj[searchTitle] = searchData
+            obj["searchTerm"] = searchData
+            setQuery(obj)
+        }
     }
+
+    
 
     
     if (isLoading) {

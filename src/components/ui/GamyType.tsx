@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import styles from "../../css/gameType.module.css";
+import { toast } from "react-toastify";
 
 const override: CSSProperties = {
   display: "block",
@@ -51,10 +52,7 @@ const GameTypePage = () => {
       value: "name",
       label: "name",
     },
-    {
-      value: "numberOfPalyers",
-      label: "numberOfPalyers",
-    },
+
   ];
 
   const showGameTypes = (data: any): ReactNode => {
@@ -134,17 +132,30 @@ const GameTypePage = () => {
 
   const handleTurfClick = () => {
     let obj: Record<string, unknown> = {};
-    if (searchTitle === "name" && searchData === "") {
-      obj["name"] = "";
-      setQuery(obj);
-    } else if (searchTitle === "numberOfPalyers" && searchData != "") {
-      obj[searchTitle] = parseInt(searchData);
-      setQuery(obj);
+    if (searchTitle === 'name' && searchData === "") {
+      obj["searchTerm"] = ""
+      setQuery(obj)
+    } else if (searchTitle === 'all') {
+      obj[searchTitle] = searchData
+      setQuery(obj)
     } else {
-      obj[searchTitle] = searchData;
-      setQuery(obj);
+      obj["searchTerm"] = searchData;
+      setQuery(obj)
     }
+
+    // if (searchTitle === "name" && searchData === "") {
+    //   // obj["name"] = "";
+    //   obj["name"] = "";
+    //   setQuery(obj);
+    // } else if (searchTitle === "numberOfPalyers" && searchData != "") {
+    //   obj[searchTitle] = parseInt(searchData);
+    //   setQuery(obj);
+    // } else {
+    //   obj[searchTitle] = searchData;
+    //   setQuery(obj);
+    // }
   };
+
 
   if (isLoading) {
     return (

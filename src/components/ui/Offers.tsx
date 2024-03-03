@@ -173,18 +173,34 @@ const OfferPage = () => {
     const handleOfferClick = () => {
         let obj: Record<string, unknown> = {}
         setLoading(true)
+        // if (searchTitle === 'game' && searchData === '') {
+        //     obj["name"] = ""
+        //     setQuery(obj)
+        // } else if (searchTitle === 'game' && searchData != '') {
+        //     obj['name'] = searchData.charAt(0).toUpperCase() + searchData.slice(1)
+        //     setQuery(obj)
+        // }
+        // else {
+        //     obj[searchTitle] = searchData
+        //     setQuery(obj)
+        // }
+
+
         if (searchTitle === 'game' && searchData === '') {
-            obj["name"] = ""
+            // obj["name"] = ""
+            obj["searchTerm"] = ""
             setQuery(obj)
-        } else if (searchTitle === 'game' && searchData != '') {
-            obj['name'] = searchData.charAt(0).toUpperCase() + searchData.slice(1)
-            setQuery(obj)
-        }
-        else {
+        } else if(searchTitle === 'all'){
             obj[searchTitle] = searchData
             setQuery(obj)
         }
+         else {
+            // obj[searchTitle] = searchData
+            obj["searchTerm"] = searchData
+            setQuery(obj)
+        }
     }
+    console.log(query)
 
     // console.log(loading, isLoading, allOffers, query)
 
