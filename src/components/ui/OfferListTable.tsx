@@ -4,9 +4,26 @@ import { useAllOffersQuery, useDeleteOfferWithIdMutation, useEditOfferMutation }
 import { Button, Table } from 'antd'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+
+interface OfferMeta {
+    page: number;
+    limit: number;
+    total: number;
+  }
+  
+  interface OfferData {
+    // Define the structure of your data object
+  }
+
+
+  interface AllOfferState {
+    meta: OfferMeta;
+    data: OfferData[];
+  }
+
 const OfferListTable = () => {
     const query: Record<string, any> = {}
-    const [allOffer, setAllOffer] = useState([])
+    const [allOffer, setAllOffer] = useState<AllOfferState>({ meta: { page: 1, limit: 10, total: 0 }, data: [] });
     const [size, setSize] = useState<number>(10)
     const [page, setPage] = useState<number>(1)
     const [sortBy, setSortBy] = useState<string>("")
@@ -22,6 +39,8 @@ const OfferListTable = () => {
     const [updateOffer, { isLoading: editloading, isSuccess: editSuccess }] = useEditOfferMutation()
 
 
+    
+    
     const [inputsValue, setValues] = useState({
         price_per_hour: '',
         turfId: '',
@@ -29,6 +48,7 @@ const OfferListTable = () => {
         fieldId: ''
     })
 
+   
     useEffect(() => {
         if (!isLoading) {
             setAllOffer(offers?.data)
@@ -131,7 +151,7 @@ const OfferListTable = () => {
     ]
 
     const onPageSizeChange = (page: number, pageSise: number) => {
-        console.log(page, pageSise)
+       
         setPage(page)
         setSize(pageSise)
     }
@@ -144,7 +164,8 @@ const OfferListTable = () => {
 
     const paginationConfig = {
         pageSize: 5,
-        total: 6,
+        // total: allOffer.meta.total != undefined ? allOffer.meta.total : 0,
+        total: allOffer.meta.total,
         pageSizeOptions: [5, 10, 20],
         showSizeChanger: true,
         onChange: onPageSizeChange
@@ -189,7 +210,7 @@ const OfferListTable = () => {
             <Table
                 loading={isLoading}
                 rowKey='id'
-                dataSource={allOffer}
+                dataSource={allOffer.data}
                 columns={columns}
                 pagination={paginationConfig}
             />

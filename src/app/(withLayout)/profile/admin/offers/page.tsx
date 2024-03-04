@@ -32,6 +32,8 @@ const Offers = () => {
   //offer list 
   const { data: offerData } = useAllOffersQuery({ ...query })
 
+  
+  
   //turf list
   const { data: allTurf, isLoading: turfLoading } = useAllTurfsQuery({ ...query })
 
@@ -39,7 +41,7 @@ const Offers = () => {
   const { data: fieldsData, isLoading: fieldLoading } = useAllFieldsQuery({ ...query })
 
   const findSingleField = () => {
-    const res = fieldsData?.data.filter((item: any) => item.turfId === inputsValue['turfId'])
+    const res = fieldsData?.data?.data.filter((item: any) => item.turfId === inputsValue['turfId'])
     let array: any = []
     if (res != undefined && Object.keys(res).length > 0) {
       res.map((item: Record<string, string>, index: string) => {
@@ -83,6 +85,7 @@ const Offers = () => {
       setEmptyError({ "errorName": 'fieldId' })
       return null
     }
+
     try {
       const res = await createOffers({ ...inputsValue }).unwrap();
       if (res.statusCode === 200 && res.success === true) {

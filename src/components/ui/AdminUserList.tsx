@@ -2,9 +2,26 @@
 import { useAllUserQuery } from '@/redux/api/authApi'
 import { Button, Table } from 'antd'
 import { useEffect, useState } from 'react'
+
+interface UserMeta {
+    page: number;
+    limit: number;
+    total: number;
+}
+
+interface UserData {
+   
+}
+
+interface AllUserState {
+    meta: UserMeta;
+    data: UserData[]
+}
+
+
 const AdminUserListTable = () => {
     const query: Record<string, any> = {}
-    const [allUser, setAllUser] = useState([])
+    const [allUser, setAllUser] = useState<AllUserState>({ meta: { page: 1, limit: 10, total: 0 }, data: [] })
     const [size, setSize] = useState<number>(10)
     const [page, setPage] = useState<number>(1)
     const [sortBy, setSortBy] = useState<string>("")
@@ -18,11 +35,12 @@ const AdminUserListTable = () => {
 
     useEffect(() => {
         if (!isLoading) {
-            setAllUser(users?.data.data)
+            setAllUser(users?.data)
         }
-    }, [isLoading, users?.data.data])
+    }, [isLoading, users?.data])
 
 
+   
     const columns = [
         {
             title: 'Name',
@@ -81,7 +99,7 @@ const AdminUserListTable = () => {
     }
     const paginationConfig = {
         pageSize: 5,
-        total: 6,
+        total: allUser.meta.total,
         pageSizeOptions: [5, 10, 20],
         showSizeChanger: true,
         onChange: onPageSizeChange
@@ -89,7 +107,7 @@ const AdminUserListTable = () => {
     return <Table
         loading={isLoading}
         rowKey='id'
-        dataSource={allUser}
+        dataSource={allUser.data}
         columns={columns}
         pagination={paginationConfig}
     />

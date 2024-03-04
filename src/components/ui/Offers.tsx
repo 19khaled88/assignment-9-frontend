@@ -145,8 +145,9 @@ const OfferPage = () => {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                             </svg>
                         </button>
-                        <dialog id="my_modal_1" className="modal mx-auto">
-                            <div className="modal-box pb-10 pt-5 pr-10 pl-10 m-5 w-96 h-96 relative">
+
+                        {/* <dialog id="my_modal_1" className="modal mx-auto">
+                            <div className="modal-box pb-5 pt-2   mx-8 mt-2 mb-8 w-96 h-96 relative">
                                 <h3 className="font-bold text-lg ">Select game onboard date</h3>
                                 <div className="modal-action">
                                     <form method="dialog" className='flex flex-col'>
@@ -154,6 +155,33 @@ const OfferPage = () => {
                                             <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} showTimeSelect dateFormat="Pp" /></div>
                                         <div className='flex flex-row justify-between'><label>End Time</label>
                                             <DatePicker selected={endDate} onChange={(date: Date) => setEndDate(date)} showTimeSelect dateFormat="Pp" /></div>
+                                        <div className='absolute -bottom-4 right-5 flex flex-row gap-4'>
+                                            <button onClick={() => bookingHandler()} className="btn btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg">Submit</button>
+                                            <button className="btn btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg">Closes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </dialog> */}
+
+
+                        <dialog id="my_modal_1" className="modal mx-auto">
+                            <div className="modal-box pb-5 pt-2 mx-8 mt-2 mb-8 h-96 relative">
+                              
+                                <div className="modal-action">
+                                    <form method="dialog" className='flex flex-col'>
+                                        <div className='flex flex-row gap-x-2'>
+                                            <div className='flex flex-col'>
+                                                <label>Start Time</label>
+                                                <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} showTimeSelect dateFormat="Pp" />
+                                            </div>
+                                            <div className='flex flex-col'>
+                                                <label>End Time</label>
+                                                <DatePicker selected={endDate} onChange={(date: Date) => setEndDate(date)} showTimeSelect dateFormat="Pp" />
+                                            </div>
+                                        </div>
+                                 
+
                                         <div className='absolute -bottom-4 right-5 flex flex-row gap-4'>
                                             <button onClick={() => bookingHandler()} className="btn btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg">Submit</button>
                                             <button className="btn btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-700 rounded-lg">Closes</button>
@@ -200,7 +228,7 @@ const OfferPage = () => {
             setQuery(obj)
         }
     }
-    console.log(query)
+   
 
     // console.log(loading, isLoading, allOffers, query)
 

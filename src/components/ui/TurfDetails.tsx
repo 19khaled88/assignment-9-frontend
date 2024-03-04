@@ -21,7 +21,7 @@ const TurfDetails = ({ ...detailsProps }) => {
       array.push(
         <div
           key={i}
-          className={`col-span-1 max-w-sm m-2 p-2 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
+          className={`col-span-1 p-2 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
         >
           <div>
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -43,7 +43,7 @@ const TurfDetails = ({ ...detailsProps }) => {
       array.push(
         <div
           key={i}
-          className={`col-span-1 max-w-sm m-2 p-4 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
+          className={`col-span-1 p-4 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
         >
           <div>
             <h5 className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
@@ -62,7 +62,7 @@ const TurfDetails = ({ ...detailsProps }) => {
         </div>
       );
     }
-    
+
     return array.length > 0 ? array : 'No data found'
   };
 
@@ -80,14 +80,9 @@ const TurfDetails = ({ ...detailsProps }) => {
     );
   }
   return (
-    <div
-      className="text-2xl lg:grid grid-cols-3 gap-5 rounded-md shadow-2xl py-10 px-10  m-auto mb-16 mt-10"
-      style={{ width: "95%" }}
-    >
-      <div
-        className={`col-span-1 flex flex-row max-w-sm m-2 p-4 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
-      >
-        <div>
+    <div className="text-2xl grid grid-cols-1 gap-y-5 rounded-md shadow-2xl py-10 px-10   mb-16 mt-10" style={{ width: "95%" }}>
+      <div className={`col-span-1 flex flex-row  py-4 pl-4 pr-10 md:w-fit h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
+        <div className="w-full">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {turfWithId.data.name}
           </h5>
@@ -121,16 +116,16 @@ const TurfDetails = ({ ...detailsProps }) => {
         </div>
       </div>
 
-      <div className="col-span-2 flex flex-col gap-6">
+      <div className="col-span-2 flex flex-col gap-y-5 mx-auto w-full">
         <div className="flex flex-col">
-          <h1 className="ml-2">Available Fields</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
+          <h1 className="pb-3">Available Fields</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
             {fields(turfWithId?.data?.fields)}
           </div>
         </div>
         <div className="flex flex-col">
-          <h1 className="ml-2">Offered games</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
+          <h1 className="pb-3">Offered games</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2">
             {offeredGames(turfWithId?.data?.gameOffers)}
           </div>
         </div>

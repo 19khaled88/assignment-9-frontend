@@ -28,6 +28,7 @@ const UserBookingList = () => {
     // all bookings
     const { data: bookings, isLoading, isError, isFetching, error, isSuccess, refetch } = useAllBookingsQuery({ ...query })
   
+    console.log(bookings)
     //delete booking
     const [deleteBooking,{isLoading:bookingDeleteLoading}] = useDeleteBookingMutation()
 
@@ -47,7 +48,7 @@ const UserBookingList = () => {
 
     useEffect(() => {
         if (!isLoading) {
-            setAllBooking(bookings?.data)
+            setAllBooking(bookings?.data?.data)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, bookings?.data])

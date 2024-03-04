@@ -22,7 +22,7 @@ const GameTypeDetails = ({ ...detailsProps }) => {
         let array: any = []
         for (let i = 0; i < Object.keys(GameOffers).length; i++) {
             array.push(
-                <div key={i} className={`col-span-1 max-w-sm m-2 p-4 w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
+                <div key={i} className={`col-span-1 p-4 h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 w-full`}>
                     <div>
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Field : {GameOffers[i]?.field.code}
@@ -68,9 +68,9 @@ const GameTypeDetails = ({ ...detailsProps }) => {
             </div>
         )
     } return (
-        <div className='text-2xl grid grid-cols-3 gap-5 rounded-md  shadow-2xl py-10 px-10  m-auto mb-16 mt-10' style={{ width: '95%' }}>
+        <div className='text-2xl grid grid-cols-1 gap-y-5 rounded-md  shadow-2xl py-10 px-10  m-auto mb-16 mt-10' style={{ width: '95%' }}>
 
-            <div className={`col-span-1  m-2 p-6 w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
+            <div className={`col-span-1 p-6 md:w-fit bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}>
 
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Game : {gameTypeWithId.data.name}
@@ -95,10 +95,10 @@ const GameTypeDetails = ({ ...detailsProps }) => {
 
             </div>
 
-            <div className='col-span-2 flex flex-col gap-6'>
+            <div className='col-span-2 flex flex-col'>
                 <div className='flex flex-col'>
-                    <h1>Available Fields</h1>
-                    <div className='flex flex-row'>
+                    <h1 className='text-center'>Available Fields</h1>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mx-auto w-full'>
                         {
                             GameOffers(gameTypeWithId?.data?.GameOffers)
                         }

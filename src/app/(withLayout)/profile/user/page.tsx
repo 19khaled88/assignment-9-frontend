@@ -2,26 +2,32 @@
 import { useUserProfileQuery, useUserUpdateMutation } from '@/redux/api/authApi'
 import { getUserInfo } from '@/redux/services/authService'
 import { Button, Form, Input } from 'antd'
+import ClipLoader from "react-spinners/ClipLoader";
 import { userInfo } from 'os'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, CSSProperties } from 'react'
 import { toast } from 'react-toastify'
+
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 const UserPage = () => {
   const [form] = Form.useForm()
   const [emailError, setEmailError] = useState('');
+
   const [info, setInfo] = useState({ id: "" })
   const { id } = info
-  // const [data, setData]= useState({})
-
 
   useEffect(() => {
     const userInfo = getUserInfo()
     if (userInfo !== null) {
-
       setInfo({
-        'id': userInfo.userId
+        id: userInfo.userId
       })
     }
   }, [])
+
 
   const { data, isLoading } = useUserProfileQuery(id)
   const [updatePost, { isLoading: updateLoading, isSuccess: updateSuccess, isError: updateError }] = useUserUpdateMutation()
@@ -61,11 +67,15 @@ const UserPage = () => {
   if (updateSuccess === true) {
     toast('Update successful!!')
   }
+
+
   if (data === undefined && isLoading === true) {
     return (
-      <div>Loading....</div>
+      <div className='w-full flex flex-row items-center justify-center'>
+        <ClipLoader color="#36d7b7" />
+      </div>
     )
-  } else if (data !== undefined && isLoading === false)
+  } else if (data !== undefined && isLoading === false) {
     return (
       <>
         <Form
@@ -116,12 +126,14 @@ const UserPage = () => {
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Submit
+              update
             </Button>
           </Form.Item>
         </Form>
       </>
     )
+  }
+
 }
 
 

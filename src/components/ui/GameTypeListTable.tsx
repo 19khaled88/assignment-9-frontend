@@ -4,9 +4,33 @@ import { Button, Table } from 'antd'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+
+interface GameTypeMeta {
+    page: number;
+    limit: number;
+    total: number;
+}
+
+interface GameTypeData {
+    GameOffers: any,
+    bookings: any,
+    id: string,
+    imgurl: string,
+    name: string
+    numberOfPalyers: number
+}
+
+
+interface AllGameTypeState {
+    meta: GameTypeMeta;
+    data: GameTypeData[]
+}
+
+
+
 const GameTypeListTable = () => {
     const query: Record<string, any> = {}
-    const [allTurf, setAllTurf] = useState([])
+    const [allGameType, setAllGameType] = useState<AllGameTypeState>({ meta: { page: 1, limit: 10, total: 0 }, data: [] })
     const [size, setSize] = useState<number>(10)
     const [page, setPage] = useState<number>(1)
     const [sortBy, setSortBy] = useState<string>("")
@@ -21,17 +45,18 @@ const GameTypeListTable = () => {
     const [deleteGameType, { isLoading: deleteLoading, isSuccess: deleteSuccess, isError: deleteError }] = useDeleteGameTypefWithIdMutation()
     const [updateGameType, { isLoading: editloading, isSuccess: editSuccess }] = useEditGameTypeMutation()
 
+   
     const [inputsValue, setValues] = useState({
         name: '',
         numberOfPalyers: '',
-        imgurl:''
+        imgurl: ''
     })
 
     useEffect(() => {
         if (!isLoading) {
-            setAllTurf(gameTypes?.data.data)
+            setAllGameType(gameTypes?.data)
         }
-    }, [isLoading, gameTypes?.data.data])
+    }, [isLoading, gameTypes?.data])
 
     //delete turf
     const deleteGameTypeHandler = async (id: string) => {
@@ -72,7 +97,7 @@ const GameTypeListTable = () => {
 
     const closeAndCleanForm = () => {
         (document.getElementById("cleanUpdateFormData") as HTMLFormElement).reset();
-        setValues({ name: '', numberOfPalyers: '',imgurl:'' });
+        setValues({ name: '', numberOfPalyers: '', imgurl: '' });
     }
 
     const submitHandler = async () => {
@@ -117,9 +142,9 @@ const GameTypeListTable = () => {
             // key: 'image',
             render: (data: any) => {
                 return (
-                   
-                        <Image src={data.imgurl} alt='No gameType Image' width={100} height={100} />
-                   
+
+                    <Image src={data.imgurl} alt='No gameType Image' width={100} height={100} />
+
                 )
             }
         },
@@ -149,7 +174,8 @@ const GameTypeListTable = () => {
     }
     const paginationConfig = {
         pageSize: 5,
-        total: 6,
+        total: allGameType.meta.total,
+        // total: allGameType.meta.total != undefined ? allGameType.meta.total : 0,
         pageSizeOptions: [5, 10, 20],
         showSizeChanger: true,
         onChange: onPageSizeChange
@@ -186,7 +212,7 @@ const GameTypeListTable = () => {
             <Table
                 loading={isLoading}
                 rowKey='id'
-                dataSource={allTurf}
+                dataSource={allGameType.data}
                 columns={columns}
                 pagination={paginationConfig}
             />

@@ -5,11 +5,27 @@ import { Button, Table } from 'antd'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
+interface FieldsMeta {
+    page: number;
+    limit: number;
+    total: number;
+}
+
+interface FieldsData {
+   
+}
+
+
+interface AllFieldsState {
+    meta: FieldsMeta;
+    data: FieldsData[]
+}
+
 
 
 const FieldListTable = () => {
     const query: Record<string, any> = {}
-    const [allField, setAllField] = useState([])
+    const [allField, setAllField] = useState<AllFieldsState>({ meta: { page: 1, limit: 10, total: 0 }, data: [] })
     const [size, setSize] = useState<number>(10)
     const [page, setPage] = useState<number>(1)
     const [sortBy, setSortBy] = useState<string>("")
@@ -26,9 +42,11 @@ const FieldListTable = () => {
         success?: boolean
     }
 
+    
     //field list query
     const { data: fields, isLoading } = useAllFieldsQuery({ ...query })
 
+   
     //delete field query
     const [deleteField, { isLoading: deleteLoading, isSuccess: deleteSuccess, isError: deleteError }] = useDeleteFieldfWithIdMutation()
 
@@ -154,7 +172,7 @@ const FieldListTable = () => {
 
 
     const onPageSizeChange = (page: number, pageSise: number) => {
-        console.log(page, pageSise)
+    
         setPage(page)
         setSize(pageSise)
     }
@@ -166,7 +184,7 @@ const FieldListTable = () => {
     }
     const paginationConfig = {
         pageSize: 5,
-        total: 6,
+        total: allField.meta.total,
         pageSizeOptions: [5, 10, 20],
         showSizeChanger: true,
         onChange: onPageSizeChange
@@ -217,7 +235,7 @@ const FieldListTable = () => {
             <Table
                 loading={isLoading}
                 rowKey='id'
-                dataSource={allField}
+                dataSource={allField.data}
                 columns={columns}
                 pagination={paginationConfig}
             />

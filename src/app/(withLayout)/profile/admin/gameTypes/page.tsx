@@ -4,6 +4,9 @@ import { useAllGameTypesQuery, useCreateGameTypeMutation } from '@/redux/api/gam
 import { Button } from 'antd'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+
+
+
 const GameType = () => {
 
   const query: Record<string, any> = {}

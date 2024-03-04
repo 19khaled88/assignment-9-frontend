@@ -4,9 +4,31 @@ import { Button, Table } from 'antd'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+
+interface TurfMeta {
+    page: number;
+    limit: number;
+    total: number;
+}
+
+interface TurfData {
+    GameOffers: any,
+    bookings: any,
+    id: string,
+    imgurl: string,
+    name: string
+    numberOfPalyers: number
+}
+
+
+interface AllTurfState {
+    meta: TurfMeta;
+    data: TurfData[]
+}
+
 const TurfListTable = () => {
     const query: Record<string, any> = {}
-    const [allTurf, setAllTurf] = useState([])
+    const [allTurf, setAllTurf] = useState<AllTurfState>({ meta: { page: 1, limit: 10, total: 0 }, data: [] })
     const [size, setSize] = useState<number>(10)
     const [page, setPage] = useState<number>(1)
     const [sortBy, setSortBy] = useState<string>("")
@@ -28,13 +50,12 @@ const TurfListTable = () => {
         imgurl: ''
     })
 
-    
 
     useEffect(() => {
         if (!isLoading) {
-            setAllTurf(turfs?.data.data)
+            setAllTurf(turfs?.data)
         }
-    }, [isLoading, turfs?.data.data])
+    }, [isLoading, turfs?.data])
 
     //delete turf
     const deleteTurfHandler = async (id: string) => {
@@ -143,7 +164,7 @@ const TurfListTable = () => {
 
     const paginationConfig = {
         pageSize: 5,
-        total: 6,
+        total: allTurf.meta.total,
         pageSizeOptions: [5, 10, 20],
         showSizeChanger: true,
         onChange: onPageSizeChange
@@ -185,7 +206,7 @@ const TurfListTable = () => {
             <Table
                 loading={isLoading}
                 rowKey='id'
-                dataSource={allTurf}
+                dataSource={allTurf.data}
                 columns={columns}
                 pagination={paginationConfig}
             />

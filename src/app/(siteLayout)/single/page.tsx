@@ -1,5 +1,4 @@
 'use client'
-
 import BannerPage from "@/components/ui/Banner";
 import { useSearchParams } from 'next/navigation'
 import TurfDetails from "@/components/ui/TurfDetails";
