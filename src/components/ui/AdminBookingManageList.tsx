@@ -4,13 +4,28 @@ import { Button, Select, Table, TableColumnGroupType } from 'antd';
 import { ColumnType } from 'antd/lib/table';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 type tokenType = {
     token: string
 }
+
+interface AllBookingAdminMeta {
+    page: number;
+    limit: number;
+    total: number;
+}
+
+interface AllBookingAdminData { }
+
+
+interface AllAllBookingAdminState {
+    meta: AllBookingAdminMeta;
+    data: any;
+}
 const AdminBookingList = () => {
     const query: Record<string, any> = {}
-    const [allBooking, setAllBooking] = useState([])
-
+    const [allBooking, setAllBooking] = useState<AllAllBookingAdminState>({ meta: { page: 1, limit: 10, total: 0 }, data: [] });
+    // const [allBooking, setAllBooking] = useState()
     const [bookingStatus, setBookingStatus] = useState('')
     const [test, setTest] = useState<Record<string, unknown> | never[]>([])
     const [size, setSize] = useState<number>(10)
@@ -62,10 +77,10 @@ const AdminBookingList = () => {
     }
 
     const deleteHandler = async (data: any) => {
-        const {id} = data
+        const { id } = data
         try {
             const response = await deleteBooking(data.id).unwrap()
-            if(response.statusCode === 200 && response.success === true){
+            if (response.statusCode === 200 && response.success === true) {
                 toast.success(response.message)
             }
         } catch (error) {
@@ -102,7 +117,8 @@ const AdminBookingList = () => {
         {
             title: 'Start-time',
             dataIndex: 'start_time',
-            key: 'start_time'
+            key: 'start_time',
+            render: (start_time: string) => moment(start_time).format('MMMM Do YYYY, h:mm:ss a')
         },
         {
             title: 'End-time',
@@ -148,7 +164,7 @@ const AdminBookingList = () => {
     }
     const paginationConfig = {
         pageSize: 5,
-        total: 6,
+        total: allBooking?.meta?.total,
         pageSizeOptions: [5, 10, 20],
         showSizeChanger: true,
         onChange: onPageSizeChange
@@ -156,10 +172,11 @@ const AdminBookingList = () => {
     return <Table
         loading={isLoading}
         rowKey='id'
-        dataSource={allBooking}
+        dataSource={allBooking?.data}
         columns={columns}
         pagination={paginationConfig}
     />
+
 }
 
 export default AdminBookingList

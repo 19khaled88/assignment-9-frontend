@@ -58,45 +58,16 @@ const LoginPage = () => {
     }
   };
   
-  if (isLoading) {
-    return (
-      <div className="w-full h-screen flex flex-row justify-center items-center">
-        {" "}
-        {/* <ClipLoader
-            color={color}
-            loading={loading}
-            cssOverride={override}
-            size={150}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          /> */}
-        <PropagateLoader color="#36d7b7" cssOverride={override} />
-      </div>
-    );
-  }
-  return (
+
+  return(
     <div className="w-full px-5">
       <ToastContainer />
       <Row
         style={{ width: "100%", margin: "auto", height: "100vh" }}
         className="grid grid-cols-1 sm:grid-cols-2"
       >
-        <Col
-          className="flex flex-grow justify-center items-center"
-          style={{
-            // display: "flex",
-            // justifyContent: "center",
-            // alignItems: "center"
-            width: "100vw",
-          }}
-        // xs={2}
-        // sm={12}
-        // md={16}
-        // lg={16}
-        // xl={14}
-        >
+        <Col className="flex flex-grow justify-center items-center" style={{ width: "100vw",}}>
           <Image
-            // style={{width:'70%'}}
             src={SignInImage}
             alt="No Image"
             className="hidden sm:flex sm:w-full md:w-4/5"
@@ -104,28 +75,10 @@ const LoginPage = () => {
             width={1000}
           />
         </Col>
-        <Col
-          style={{
-            // display: "flex",
-            // flexDirection: "column",
-            // justifyContent: "center",
-            // alignItems: "start",
-            // gap: "20px",
-            height: "95vh",
-          }}
-          className="px-5 flex flex-col gap-5 justify-center items-start"
-        // xs={20}
-        // sm={12}
-        // md={8}
-        // lg={8}
-        // xl={10}
-        >
+        <Col style={{ height: "95vh", }} className="px-5 flex flex-col gap-5 justify-center items-start">
           <h1 className="text-2xl font-bold">Sign In Form</h1>
-
           <ReactForm submitHandler={onSubmit}>
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-            >
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               <div>
                 <FormInput
                   name="email"
@@ -144,8 +97,7 @@ const LoginPage = () => {
                 style={{ fontSize: "20px", height: "40px" }}
                 className="bg-blue-600"
                 htmlType="submit"
-                
-              >
+               >
                 {
                   loggingLoading ? (<><ClipLoader color="#36d7b7" />  <p>Login</p></>) : "Login"
                 }
@@ -165,7 +117,118 @@ const LoginPage = () => {
         </Col>
       </Row>
     </div>
-  );
+  )
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="w-full h-screen flex flex-row justify-center items-center">
+  //       {" "}
+  //       {/* <ClipLoader
+  //           color={color}
+  //           loading={loading}
+  //           cssOverride={override}
+  //           size={150}
+  //           aria-label="Loading Spinner"
+  //           data-testid="loader"
+  //         /> */}
+  //       <PropagateLoader color="#36d7b7" cssOverride={override} />
+  //     </div>
+  //   );
+  // }
+  // return (
+  //   <div className="w-full px-5">
+  //     <ToastContainer />
+  //     <Row
+  //       style={{ width: "100%", margin: "auto", height: "100vh" }}
+  //       className="grid grid-cols-1 sm:grid-cols-2"
+  //     >
+  //       <Col
+  //         className="flex flex-grow justify-center items-center"
+  //         style={{
+  //           // display: "flex",
+  //           // justifyContent: "center",
+  //           // alignItems: "center"
+  //           width: "100vw",
+  //         }}
+  //       // xs={2}
+  //       // sm={12}
+  //       // md={16}
+  //       // lg={16}
+  //       // xl={14}
+  //       >
+  //         <Image
+  //           // style={{width:'70%'}}
+  //           src={SignInImage}
+  //           alt="No Image"
+  //           className="hidden sm:flex sm:w-full md:w-4/5"
+  //           height={1500}
+  //           width={1000}
+  //         />
+  //       </Col>
+  //       <Col
+  //         style={{
+  //           // display: "flex",
+  //           // flexDirection: "column",
+  //           // justifyContent: "center",
+  //           // alignItems: "start",
+  //           // gap: "20px",
+  //           height: "95vh",
+  //         }}
+  //         className="px-5 flex flex-col gap-5 justify-center items-start"
+  //       // xs={20}
+  //       // sm={12}
+  //       // md={8}
+  //       // lg={8}
+  //       // xl={10}
+  //       >
+  //         <h1 className="text-2xl font-bold">Sign In Form</h1>
+
+  //         <ReactForm submitHandler={onSubmit}>
+  //           <div
+  //             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+  //           >
+  //             <div>
+  //               <FormInput
+  //                 name="email"
+  //                 type="text"
+  //                 size="large"
+  //                 label="User Email"
+  //               />
+  //               <FormInput
+  //                 name="password"
+  //                 type="password"
+  //                 size="large"
+  //                 label="User Password"
+  //               />
+  //             </div>
+  //             <Button
+  //               style={{ fontSize: "20px", height: "40px" }}
+  //               className="bg-blue-600"
+  //               htmlType="submit"
+                
+  //             >
+  //               {
+  //                 loggingLoading ? (<><ClipLoader color="#36d7b7" />  <p>Login</p></>) : "Login"
+  //               }
+
+  //             </Button>
+  //           </div>
+  //         </ReactForm>
+  //         <div>
+  //           <h2>Do not have Account?</h2>
+  //           <Button
+  //             onClick={() => router.push("/register")}
+  //             className="bg-blue-600 text-white font-bold"
+  //           >
+  //             Go Register
+  //           </Button>
+  //         </div>
+  //       </Col>
+  //     </Row>
+  //   </div>
+  // );
+
+
 };
 
 export default LoginPage;

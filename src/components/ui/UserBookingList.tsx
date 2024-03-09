@@ -10,9 +10,29 @@ import { toast } from 'react-toastify';
 type tokenType = {
     token: string
 }
+
+
+interface BookingMeta {
+    page: number;
+    limit: number;
+    total: number;
+}
+
+interface BookingData {
+
+}
+
+
+interface AllBookingState {
+    meta: BookingMeta;
+    data: BookingData[];
+}
+
+
 const UserBookingList = () => {
     const query: Record<string, any> = {}
     const [allBooking, setAllBooking] = useState([])
+    const [allBookings, setAllBookings] = useState<AllBookingState>({ meta: { page: 1, limit: 10, total: 0 }, data: [] });
 
 
     const [test, setTest] = useState<Record<string, unknown> | never[]>([])
@@ -27,17 +47,16 @@ const UserBookingList = () => {
 
     // all bookings
     const { data: bookings, isLoading, isError, isFetching, error, isSuccess, refetch } = useAllBookingsQuery({ ...query })
-  
-    console.log(bookings)
+
     //delete booking
-    const [deleteBooking,{isLoading:bookingDeleteLoading}] = useDeleteBookingMutation()
+    const [deleteBooking, { isLoading: bookingDeleteLoading }] = useDeleteBookingMutation()
 
 
-    const deleteHandler=async(data:any)=>{
-        
+    const deleteHandler = async (data: any) => {
+
         try {
-            const response =await deleteBooking(data.id).unwrap()
-            if(response.statusCode === 200 && response.success === true){
+            const response = await deleteBooking(data.id).unwrap()
+            if (response.statusCode === 200 && response.success === true) {
                 toast.success(response.message)
             }
         } catch (error) {
@@ -49,6 +68,7 @@ const UserBookingList = () => {
     useEffect(() => {
         if (!isLoading) {
             setAllBooking(bookings?.data?.data)
+            setAllBookings(bookings?.data)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, bookings?.data])
@@ -99,7 +119,7 @@ const UserBookingList = () => {
             render: function (data: any) {
                 return (
                     <div style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
-                      
+
                         <Button onClick={() => deleteHandler(data)} type="primary" danger>Cancel</Button>
                     </div>
                 )
@@ -118,20 +138,25 @@ const UserBookingList = () => {
         setSortBy(field as string)
         setSortOrder(order === 'ascend' ? 'asc' : 'desc')
     }
+    
     const paginationConfig = {
         pageSize: 5,
-        total: 6,
+        total: allBookings?.meta?.total ? allBookings.meta.total : 0,
         pageSizeOptions: [5, 10, 20],
         showSizeChanger: true,
         onChange: onPageSizeChange
     }
-    return <Table
-        loading={isLoading}
-        rowKey='id'
-        dataSource={allBooking}
-        columns={columns}
-        pagination={paginationConfig}
-    />
+    return (
+        <>
+            <Table
+                loading={isLoading}
+                rowKey='id'
+                dataSource={allBooking}
+                columns={columns}
+                pagination={paginationConfig}
+            />
+        </>
+    )
 }
 
 export default UserBookingList

@@ -5,7 +5,7 @@ import React from 'react'
 const AllBookings = () => {
   return (
     <div>
-      <h1>Admin - booking list</h1>
+      <h1 className='text-2xl text-gray-600'>Admin - booking list</h1>
       <AdminBookingList />
       </div>
   )

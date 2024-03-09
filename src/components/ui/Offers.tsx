@@ -279,7 +279,6 @@ const OfferPage = () => {
                                     options={options}
                                     onChange={(value: string) => setSearchTitle(value)}
                                 />
-
                             </>
                             :
                             <Select

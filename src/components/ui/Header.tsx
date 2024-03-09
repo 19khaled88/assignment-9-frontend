@@ -12,7 +12,7 @@ const Header = () => {
     router.push('/login')
   }
   return (
-    <AntHeader className='px-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'end', alignItems: 'center' }}>
+    <AntHeader className='px-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'end', alignItems: 'center',backgroundColor:'#09181D' }}>
       <Button onClick={(()=>router.push('/'))} style={{marginRight:'20px'}}>Home</Button>
       <Button onClick={logOut} style={{ float: 'right' }}>Logout</Button>
       <ToastContainer />

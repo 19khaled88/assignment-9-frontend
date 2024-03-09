@@ -68,6 +68,7 @@ const OfferListTable = () => {
 
     }
 
+   
     // if (deleteSuccess === true) {
     //     toast.success('Game type deleted successfully')
     // } else if (deleteError === true) {
@@ -165,7 +166,7 @@ const OfferListTable = () => {
     const paginationConfig = {
         pageSize: 5,
         // total: allOffer.meta.total != undefined ? allOffer.meta.total : 0,
-        total: allOffer.meta.total,
+        total: allOffer?.meta?.total,
         pageSizeOptions: [5, 10, 20],
         showSizeChanger: true,
         onChange: onPageSizeChange
@@ -210,7 +211,7 @@ const OfferListTable = () => {
             <Table
                 loading={isLoading}
                 rowKey='id'
-                dataSource={allOffer.data}
+                dataSource={allOffer?.data}
                 columns={columns}
                 pagination={paginationConfig}
             />
