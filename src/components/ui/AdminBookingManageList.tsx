@@ -123,7 +123,8 @@ const AdminBookingList = () => {
         {
             title: 'End-time',
             dataIndex: 'end_time',
-            key: 'end_time'
+            key: 'end_time',
+            render: (end_time: string) => moment(end_time).format('MMMM Do YYYY, h:mm:ss a')
         },
         {
             title: 'Payment_Status',

@@ -194,8 +194,6 @@ const Turfs = () => {
     }
 
     
-
-    
     if (isLoading) {
         return (
             <div className="flex flex-col pt-10 justify-items-center justify-center ">
