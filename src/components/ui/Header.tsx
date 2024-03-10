@@ -13,8 +13,8 @@ const Header = () => {
   }
   return (
     <AntHeader className='px-2' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'end', alignItems: 'center',backgroundColor:'#09181D' }}>
-      <Button onClick={(()=>router.push('/'))} style={{marginRight:'20px'}}>Home</Button>
-      <Button onClick={logOut} style={{ float: 'right' }}>Logout</Button>
+      <Button onClick={(()=>router.push('/'))} style={{marginRight:'20px'}} className="bg-white border-none hover:bg-gray-500 hover:text-white">Home</Button>
+      <Button onClick={logOut} style={{ float: 'right' }} className="bg-white border-none hover:bg-gray-500 hover:text-white">Logout</Button>
       <ToastContainer />
     </AntHeader>
   )

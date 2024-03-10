@@ -66,11 +66,14 @@ interface ChartOptions {
 interface PieChartOptions {
   chart: {
     height: number;
+    width: number;
     type: "pie";
   };
   series: number[];
-  labels:  string[],
-//   chartOptions: {labels: string[]; };
+  labels: string[];
+  responsive: any;
+
+  //   chartOptions: {labels: string[]; };
 }
 
 const Dashboard = () => {
@@ -125,12 +128,28 @@ const Dashboard = () => {
 
     var option1: PieChartOptions = {
       chart: {
-        height: 280,
+        height: 1000,
+        width: 1000,
         type: "pie",
       },
       series: [3, 5, 2, 8],
       labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-    //   chartOptions: { labels: ["Week 1", "Week 2", "Week 3", "Week 4"], },
+      //   chartOptions: { labels: ["Week 1", "Week 2", "Week 3", "Week 4"], },
+      responsive: [
+        {
+          breakpoint: 1000,
+          options: {
+            plotOptions: {
+              bar: {
+                horizontal: false,
+              },
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
     };
 
     setChartData(options);
@@ -223,9 +242,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         {chartData && (
-          <div className="flex flex-col">
+          <div className="flex flex-col shadow-xl p-1 bg-white">
             <ApexCharts
               options={chartData}
               series={chartData.series}
@@ -239,7 +258,7 @@ const Dashboard = () => {
           </div>
         )}
         {pieData && (
-          <div className="flex flex-col">
+          <div className="flex flex-col shadow-xl p-1 bg-white justify-center h-full">
             <ApexCharts
               options={pieData}
               series={pieData.series}
