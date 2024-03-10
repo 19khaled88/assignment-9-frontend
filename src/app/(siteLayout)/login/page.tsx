@@ -23,7 +23,7 @@ const override: CSSProperties = {
 const LoginPage = () => {
   const router = useRouter();
   const [userLogin, { error, isLoading }] = useUserLoginMutation();
-  const [loggingLoading, setLoggingLoading] = useState(false)
+  const [loggingLoading, setLoggingLoading] = useState(false);
   // let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#ffffff");
 
@@ -38,35 +38,37 @@ const LoginPage = () => {
   }
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    setLoggingLoading(true)
+    setLoggingLoading(true);
     try {
       const res = await userLogin({ ...data }).unwrap();
-      
+
       if (!res || res === undefined) {
         // router.push("/profile");
         router.push("/login");
       }
       if (res && res.token) {
-        setLoggingLoading(false)
+        setLoggingLoading(false);
         storeUserInfo({ token: res?.token });
-       
+
         router.push("/profile");
       }
     } catch (error: any) {
-      setLoggingLoading(false)
+      setLoggingLoading(false);
       toast.error(error?.data.data);
     }
   };
-  
 
-  return(
+  return (
     <div className="w-full px-5">
       <ToastContainer />
       <Row
         style={{ width: "100%", margin: "auto", height: "100vh" }}
         className="grid grid-cols-1 sm:grid-cols-2"
       >
-        <Col className="flex flex-grow justify-center items-center" style={{ width: "100vw",}}>
+        <Col
+          className="flex flex-grow justify-center items-center"
+          style={{ width: "100vw" }}
+        >
           <Image
             src={SignInImage}
             alt="No Image"
@@ -75,10 +77,15 @@ const LoginPage = () => {
             width={1000}
           />
         </Col>
-        <Col style={{ height: "95vh", }} className="px-5 flex flex-col gap-5 justify-center items-start">
+        <Col
+          style={{ height: "95vh" }}
+          className="px-5 flex flex-col gap-5 justify-center items-start"
+        >
           <h1 className="text-2xl font-bold">Sign In Form</h1>
           <ReactForm submitHandler={onSubmit}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
               <div>
                 <FormInput
                   name="email"
@@ -97,11 +104,14 @@ const LoginPage = () => {
                 style={{ fontSize: "20px", height: "40px" }}
                 className="bg-blue-600"
                 htmlType="submit"
-               >
-                {
-                  loggingLoading ? (<><ClipLoader color="#36d7b7" />  <p>Login</p></>) : "Login"
-                }
-
+              >
+                {loggingLoading ? (
+                  <>
+                    <ClipLoader color="#36d7b7" /> <p>Login</p>
+                  </>
+                ) : (
+                  "Login"
+                )}
               </Button>
             </div>
           </ReactForm>
@@ -114,10 +124,57 @@ const LoginPage = () => {
               Go Register
             </Button>
           </div>
+          <div
+            className="px-6 py-4"
+            style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
+          >
+            <table className="table-auto w-full">
+              <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                <tr>
+                  <th className="p-2 whitespace-nowrap">
+                    <div className="font-semibold text-gray-800 text-left">
+                      Email
+                    </div>
+                  </th>
+                  <th className="p-2 whitespace-nowrap">
+                    <div className="font-semibold text-left text-gray-800">
+                      Password
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-sm divide-y divide-gray-500">
+                <tr className="divide-x divide-gray-500">
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="flex items-center ">
+                      <div className="font-medium text-gray-800">
+                        admin@gmail.com
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="text-left">12345678</div>
+                  </td>
+                </tr>
+                <tr className="divide-x divide-gray-500">
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="font-medium text-gray-800">
+                        user2@gmail.com
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-2 whitespace-nowrap">
+                    <div className="text-left">12345678</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </Col>
       </Row>
     </div>
-  )
+  );
 
   // if (isLoading) {
   //   return (
@@ -205,7 +262,7 @@ const LoginPage = () => {
   //               style={{ fontSize: "20px", height: "40px" }}
   //               className="bg-blue-600"
   //               htmlType="submit"
-                
+
   //             >
   //               {
   //                 loggingLoading ? (<><ClipLoader color="#36d7b7" />  <p>Login</p></>) : "Login"
@@ -227,8 +284,6 @@ const LoginPage = () => {
   //     </Row>
   //   </div>
   // );
-
-
 };
 
 export default LoginPage;
